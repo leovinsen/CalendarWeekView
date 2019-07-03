@@ -85,30 +85,36 @@ public class WeekFragment extends Fragment {
 
     @OnClick({R.id.sun, R.id.mon, R.id.tue, R.id.wed, R.id.thu, R.id.fri, R.id.sat})
     void onDateClick(View v){
-        v.setBackgroundResource(R.drawable.yellow_circle_indicator);
+        CalendarDay clickedDay = null;
         switch(v.getId()){
             case R.id.sun:
-                listener.onDateSelected(week.getSun(), v);
+                clickedDay = week.getSun();
                 break;
             case R.id.mon:
-                listener.onDateSelected(week.getMon(), v);
+                clickedDay = week.getMon();
                 break;
             case R.id.tue:
-                listener.onDateSelected(week.getTue(), v);
+                clickedDay = week.getTue();
                 break;
             case R.id.wed:
-                listener.onDateSelected(week.getWed(), v);
+                clickedDay = week.getWed();
                 break;
             case R.id.thu:
-                listener.onDateSelected(week.getThu(), v);
+                clickedDay = week.getThu();
                 break;
             case R.id.fri:
-                listener.onDateSelected(week.getFri(), v);
+                clickedDay = week.getFri();
                 break;
             case R.id.sat:
-                listener.onDateSelected(week.getSat(), v);
+                clickedDay = week.getSat();
                 break;
         }
+
+        //Prevent selection on empty date
+        if(clickedDay == null) return;
+
+        listener.onDateSelected(clickedDay, v);
+        v.setBackgroundResource(R.drawable.yellow_circle_indicator);
     }
 
     public interface OnDateSelectedListener {
