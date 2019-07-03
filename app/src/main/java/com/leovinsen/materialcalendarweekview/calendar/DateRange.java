@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 public class DateRange {
 
@@ -48,6 +47,7 @@ public class DateRange {
             int day = start.get(Calendar.DAY_OF_MONTH);
             int month = start.get(Calendar.MONTH);
             int year = start.get(Calendar.YEAR);
+            long dateInMillis = start.getTimeInMillis();
 
             if(lastMonth == -1 ) {
                 // do nothing
@@ -67,27 +67,28 @@ public class DateRange {
             } else {
                 //same month
                 Log.d(TAG, day + " " + month + " " + year);
+                CalendarDay cd = new CalendarDay(day, month, year, dateInMillis);
                 switch(dayOfWeek){
                     case Calendar.SUNDAY:
-                        week.setSun(new CalendarDay(day, month, year));
+                        week.setSun(cd);
                         break;
                     case Calendar.MONDAY:
-                        week.setMon(new CalendarDay(day, month, year));
+                        week.setMon(cd);
                         break;
                     case Calendar.TUESDAY:
-                        week.setTue(new CalendarDay(day, month, year));
+                        week.setTue(cd);
                         break;
                     case Calendar.WEDNESDAY:
-                        week.setWed(new CalendarDay(day, month, year));
+                        week.setWed(cd);
                         break;
                     case Calendar.THURSDAY:
-                        week.setThu(new CalendarDay(day, month, year));
+                        week.setThu(cd);
                         break;
                     case Calendar.FRIDAY:
-                        week.setFri(new CalendarDay(day, month, year));
+                        week.setFri(cd);
                         break;
                     case Calendar.SATURDAY:
-                        week.setSat(new CalendarDay(day, month, year));
+                        week.setSat(cd);
                         data.add(week);
                         week = new Week();
 

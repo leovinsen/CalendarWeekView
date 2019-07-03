@@ -7,11 +7,13 @@ public class CalendarDay implements Serializable {
     private int day;
     private int month;
     private int year;
+    private long dateInMillis;
 
-    public CalendarDay(int day, int month, int year) {
+    public CalendarDay(int day, int month, int year, long dateInMillis) {
         this.day = day;
         this.month = month;
         this.year = year;
+        this.dateInMillis = dateInMillis;
     }
 
     public int getDay() {
@@ -24,5 +26,9 @@ public class CalendarDay implements Serializable {
 
     public int getYear() {
         return year;
+    }
+
+    public long getDateInMillis() {
+        return dateInMillis;
     }
 }
