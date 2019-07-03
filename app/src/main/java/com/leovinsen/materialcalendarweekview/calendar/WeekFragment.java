@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.leovinsen.materialcalendarweekview.R;
@@ -32,6 +33,7 @@ public class WeekFragment extends Fragment {
     TextView sat;
 
     private Week week;
+    private OnDateSelectedListener listener;
 
     public int getMonth(){
         return week.getMonth();
@@ -39,13 +41,14 @@ public class WeekFragment extends Fragment {
 
     static final String KEY_WEEK = "week";
 
-    public static WeekFragment newInstance(Week week) {
+    public static WeekFragment newInstance(Week week, OnDateSelectedListener listener) {
 
         Bundle args = new Bundle();
         args.putSerializable(KEY_WEEK, week);
 
         WeekFragment fragment = new WeekFragment();
         fragment.setArguments(args);
+        fragment.listener = listener;
         return fragment;
     }
 
@@ -76,6 +79,35 @@ public class WeekFragment extends Fragment {
         return view;
     }
 
+    @OnClick({R.id.sun, R.id.mon, R.id.tue, R.id.wed, R.id.thu, R.id.fri, R.id.sat})
+    void onDateClick(View v){
+        v.setBackgroundResource(R.drawable.yellow_circle_indicator);
+        switch(v.getId()){
+            case R.id.sun:
+                listener.onDateSelected(week.getSun(), v);
+                break;
+            case R.id.mon:
+                listener.onDateSelected(week.getMon(), v);
+                break;
+            case R.id.tue:
+                listener.onDateSelected(week.getTue(), v);
+                break;
+            case R.id.wed:
+                listener.onDateSelected(week.getWed(), v);
+                break;
+            case R.id.thu:
+                listener.onDateSelected(week.getThu(), v);
+                break;
+            case R.id.fri:
+                listener.onDateSelected(week.getFri(), v);
+                break;
+            case R.id.sat:
+                listener.onDateSelected(week.getSat(), v);
+                break;
+        }
+    }
 
-
+    public interface OnDateSelectedListener {
+        void onDateSelected(CalendarDay day, View v);
+    }
 }

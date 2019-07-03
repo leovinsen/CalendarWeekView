@@ -4,49 +4,63 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/sun"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/mon"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/tue"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/wed"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/thu"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/fri"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
 
-    <TextView
+    <com.leovinsen.materialcalendarweekview.calendar.CalendarTextView
+        style="@style/CalendarDateAppearance"
         android:id="@+id/sat"
         android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 

@@ -17,8 +17,7 @@ import java.util.Calendar;
 
 public class CustomCalendar extends LinearLayout {
 
-    TextView textMonth;
-    TextView textYear;
+    TextView textMonthYear;
     ImageButton btnPrev;
     ImageButton btnNext;
     ViewGroup layoutWeekdays;
@@ -40,8 +39,7 @@ public class CustomCalendar extends LinearLayout {
     }
 
     private void assignViews() {
-        textMonth = findViewById(R.id.month);
-        textYear = findViewById(R.id.year);
+        textMonthYear = findViewById(R.id.monthYear);
         btnPrev = findViewById(R.id.btnPrev);
         btnNext = findViewById(R.id.btnNext);
         layoutWeekdays = findViewById(R.id.layout_weekDays);
@@ -56,6 +54,7 @@ public class CustomCalendar extends LinearLayout {
     public void setAdapter(final PagerAdapter adapter){
         this.adapter = (CalendarAdapter) adapter;
         this.pagerDates.setAdapter(adapter);
+        this.pagerDates.setOffscreenPageLimit(adapter.getCount() - 1);
         this.pagerDates.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -77,7 +76,7 @@ public class CustomCalendar extends LinearLayout {
 
 
     public void updateMonth(int month){
-        String monthText = null;
+        String monthText;
         switch (month){
             case Calendar.JANUARY:
                 monthText = "January";
@@ -118,7 +117,7 @@ public class CustomCalendar extends LinearLayout {
             default:
                 monthText = "(Not Found)";
         }
-        this.textMonth.setText(monthText);
+        this.textMonthYear.setText(monthText + " 2019");
     }
 
 

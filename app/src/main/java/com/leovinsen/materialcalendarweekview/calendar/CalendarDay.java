@@ -1,6 +1,8 @@
 package com.leovinsen.materialcalendarweekview.calendar;
 
-public class CalendarDay {
+import java.io.Serializable;
+
+public class CalendarDay implements Serializable {
 
     private int day;
     private int month;

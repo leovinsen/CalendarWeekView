@@ -13,6 +13,7 @@ public class DateRange {
     private long today;
     private List<Week> data;
     private int lastMonth = -1;
+    private boolean previousEndOfMonthIsSaturday = false;
 
     public DateRange(long today){
         this.today = today;
@@ -49,9 +50,17 @@ public class DateRange {
             if(lastMonth == -1 ) {
                 // do nothing
             } else if (lastMonth != month){
+                Log.d(TAG, "Different month");
                 //different month
-                data.add(week);
-                week = new Week();
+                if(!previousEndOfMonthIsSaturday){
+                    Log.d(TAG, "Adding new week");
+                    data.add(week);
+                    week = new Week();
+
+                } else {
+                    previousEndOfMonthIsSaturday = false;
+                    Log.d(TAG, "Last Month end of month was saturday; skip adding an empty week");
+                }
                 //dont increment calendar
             } else {
                 //same month
@@ -79,6 +88,11 @@ public class DateRange {
                         week.setSat(new CalendarDay(day, month, year));
                         data.add(week);
                         week = new Week();
+
+                        int endOfMonth = start.getActualMaximum(Calendar.DAY_OF_MONTH);
+                        if(endOfMonth == day){
+                            previousEndOfMonthIsSaturday = true;
+                        }
                         Log.d(TAG, "Adding new week");
                         break;
                     default:
@@ -90,6 +104,12 @@ public class DateRange {
 
             lastMonth = month;
 
+        }
+
+        //If last added week is fully filled, don't add
+        //Else, add it to calendar (because add week is only executed on Saturdays which can only happen if week is fully filled)
+        if(week.getSun() == null){
+            data.add(week);
         }
     }
 }

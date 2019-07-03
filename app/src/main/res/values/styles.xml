@@ -8,4 +8,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="WeekDays">
+        <item name="android:fontFamily">@font/trueno_semi_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#FF222222</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="CalendarHeaderAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#DE000000</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/trueno_medium</item>
+    </style>
+
+    <style name="CalendarDateAppearance" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">#FF3B3B3B</item>
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/trueno_regular</item>
+    </style>
 </resources>

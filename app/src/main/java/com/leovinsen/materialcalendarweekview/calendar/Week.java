@@ -12,6 +12,16 @@ class Week implements Serializable {
     private CalendarDay sat;
     private int month = -1;
 
+    boolean allDaysAreFilled(){
+        return sun != null &&
+                mon != null &&
+                tue != null &&
+                wed != null &&
+                thu != null &&
+                fri != null &&
+                sat != null;
+    }
+
     public int getMonth(){
         return month;
     }

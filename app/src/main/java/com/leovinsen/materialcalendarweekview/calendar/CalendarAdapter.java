@@ -1,18 +1,15 @@
 package com.leovinsen.materialcalendarweekview.calendar;
 
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarAdapter extends FragmentPagerAdapter {
+public class CalendarAdapter extends FragmentPagerAdapter implements  WeekFragment.OnDateSelectedListener{
 
     private static final String TAG = CalendarAdapter.class.getSimpleName();
     private DateRange dateRange;
@@ -20,6 +17,7 @@ public class CalendarAdapter extends FragmentPagerAdapter {
     private List<Fragment> fragments = new ArrayList<>();
 
     private CalendarDay selectedDay;
+    private View selectedDayView;
 
     public CalendarAdapter(FragmentManager fm, DateRange dateRange, long today) {
         super(fm);
@@ -28,7 +26,7 @@ public class CalendarAdapter extends FragmentPagerAdapter {
         int size = dateRange.getWeekSize();
         Log.d(TAG, "Size " + size);
         for(int i =0; i < size; i++){
-            fragments.add(WeekFragment.newInstance(dateRange.getWeekIndex(i)));
+            fragments.add(WeekFragment.newInstance(dateRange.getWeekIndex(i), this));
         }
     }
 
@@ -46,7 +44,10 @@ public class CalendarAdapter extends FragmentPagerAdapter {
         return selectedDay;
     }
 
-    public interface OnMonthChangeListener{
-        void onMonthChange();
+    @Override
+    public void onDateSelected(CalendarDay day, View v) {
+        this.selectedDay = day;
+        if(selectedDayView != null) selectedDayView.setBackground(null);
+        this.selectedDayView = v;
     }
 }
