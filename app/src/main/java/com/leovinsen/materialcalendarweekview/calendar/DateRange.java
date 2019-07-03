@@ -15,6 +15,8 @@ public class DateRange {
     private int lastMonth = -1;
     private boolean previousEndOfMonthIsSaturday = false;
 
+
+    private final static int MONTHS_RANGE = 5;
     public DateRange(long today){
         this.today = today;
         this.data = new ArrayList<>();
@@ -26,7 +28,7 @@ public class DateRange {
         cal.setTimeInMillis(today);
 
         Calendar endOfCal = (Calendar) cal.clone();
-        endOfCal.add(Calendar.MONTH, 3);
+        endOfCal.add(Calendar.MONTH, MONTHS_RANGE);
         getWeeksFromRange(cal, endOfCal);
     }
 
@@ -108,7 +110,7 @@ public class DateRange {
 
         //If last added week is fully filled, don't add
         //Else, add it to calendar (because add week is only executed on Saturdays which can only happen if week is fully filled)
-        if(week.getSun() == null){
+        if(!week.isEmpty()){
             data.add(week);
         }
     }

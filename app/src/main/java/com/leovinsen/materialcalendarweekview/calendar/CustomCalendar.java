@@ -2,6 +2,7 @@ package com.leovinsen.materialcalendarweekview.calendar;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -25,7 +26,6 @@ public class CustomCalendar extends LinearLayout {
 
     CalendarAdapter adapter;
 
-
     public CustomCalendar(Context context) {
         super(context);
     }
@@ -36,6 +36,22 @@ public class CustomCalendar extends LinearLayout {
         inflater.inflate(R.layout.custom_calendar, this);
 
         assignViews();
+    }
+
+    public void init(FragmentManager fm){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        long today = calendar.getTimeInMillis();
+
+        DateRange dateRange = new DateRange(Calendar.getInstance().getTimeInMillis());
+
+        CalendarAdapter adapter = new CalendarAdapter(fm, dateRange, today);
+        setAdapter(adapter);
+        updateMonth(dateRange.getWeekIndex(0).getMonth());
     }
 
     private void assignViews() {
@@ -53,8 +69,7 @@ public class CustomCalendar extends LinearLayout {
 
     public void setAdapter(final PagerAdapter adapter){
         this.adapter = (CalendarAdapter) adapter;
-        this.pagerDates.setAdapter(adapter);
-        this.pagerDates.setOffscreenPageLimit(adapter.getCount() - 1);
+
         this.pagerDates.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
@@ -72,6 +87,9 @@ public class CustomCalendar extends LinearLayout {
 
             }
         });
+
+        this.pagerDates.setAdapter(adapter);
+        this.pagerDates.setOffscreenPageLimit(adapter.getCount() - 1);
     }
 
 

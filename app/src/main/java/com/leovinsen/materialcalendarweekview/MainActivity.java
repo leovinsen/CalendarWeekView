@@ -25,18 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-
-        long today = calendar.getTimeInMillis();
-
-        DateRange dateRange = new DateRange(Calendar.getInstance().getTimeInMillis());
-
-        CalendarAdapter adapter = new CalendarAdapter(getSupportFragmentManager(), dateRange, today);
-        calView.setAdapter(adapter);
+        calView.init(getSupportFragmentManager());
     }
 
 
