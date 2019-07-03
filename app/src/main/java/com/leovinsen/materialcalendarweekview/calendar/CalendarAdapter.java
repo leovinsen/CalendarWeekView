@@ -9,7 +9,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalendarAdapter extends FragmentPagerAdapter implements  WeekFragment.OnDateSelectedListener{
+public class CalendarAdapter extends FragmentPagerAdapter implements WeekFragment.OnDateSelectedListener {
 
     private static final String TAG = CalendarAdapter.class.getSimpleName();
     private DateRange dateRange;
@@ -25,7 +25,7 @@ public class CalendarAdapter extends FragmentPagerAdapter implements  WeekFragme
         this.today = today;
         int size = dateRange.getWeekSize();
         Log.d(TAG, "Size " + size);
-        for(int i =0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             fragments.add(WeekFragment.newInstance(dateRange.getWeekIndex(i), this));
         }
     }
@@ -47,7 +47,10 @@ public class CalendarAdapter extends FragmentPagerAdapter implements  WeekFragme
     @Override
     public void onDateSelected(CalendarDay day, View v) {
         this.selectedDay = day;
-        if(selectedDayView != null) selectedDayView.setBackground(null);
+        if (selectedDayView != null && selectedDayView != v) {
+            selectedDayView.setBackground(null);
+
+        }
         this.selectedDayView = v;
     }
 }
