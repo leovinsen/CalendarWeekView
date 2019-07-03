@@ -7,10 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.leovinsen.materialcalendarweekview.R;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +63,10 @@ public class WeekFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_week, container, false);
         ButterKnife.bind(this, view);
         Bundle args = getArguments();
+
         week = (Week) args.getSerializable(KEY_WEEK);
+
+        Objects.requireNonNull(args, "Week object is null; Please check that the fragment arguments are set properly");
 
         CalendarDay sun = week.getSun();
         CalendarDay mon = week.getMon();
@@ -86,6 +90,8 @@ public class WeekFragment extends Fragment {
     @OnClick({R.id.sun, R.id.mon, R.id.tue, R.id.wed, R.id.thu, R.id.fri, R.id.sat})
     void onDateClick(View v){
         CalendarDay clickedDay = null;
+
+        //Get the selected day's CalendarDay object
         switch(v.getId()){
             case R.id.sun:
                 clickedDay = week.getSun();
@@ -113,6 +119,7 @@ public class WeekFragment extends Fragment {
         //Prevent selection on empty date
         if(clickedDay == null) return;
 
+        //Pass
         listener.onDateSelected(clickedDay, v);
         v.setBackgroundResource(R.drawable.yellow_circle_indicator);
     }
