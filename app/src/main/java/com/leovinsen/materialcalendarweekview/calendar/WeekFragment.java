@@ -39,7 +39,11 @@ public class WeekFragment extends Fragment {
         return week.getMonth();
     }
 
-    static final String KEY_WEEK = "week";
+    public Week getWeek(){
+        return this.week;
+    }
+
+    static final String KEY_WEEK = "getWeek";
 
     public static WeekFragment newInstance(Week week, OnDateSelectedListener listener) {
 

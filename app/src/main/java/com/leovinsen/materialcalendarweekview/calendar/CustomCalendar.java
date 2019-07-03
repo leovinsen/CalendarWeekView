@@ -51,7 +51,9 @@ public class CustomCalendar extends LinearLayout {
 
         CalendarAdapter adapter = new CalendarAdapter(fm, dateRange, today);
         setAdapter(adapter);
-        updateMonth(dateRange.getWeekIndex(0).getMonth());
+
+        Week firstWeek =dateRange.getWeekIndex(0);
+        updateMonthYearText(firstWeek);
     }
 
     private void assignViews() {
@@ -79,7 +81,7 @@ public class CustomCalendar extends LinearLayout {
             @Override
             public void onPageSelected(int i) {
                 WeekFragment frag = (WeekFragment) ((CalendarAdapter) adapter).getItem(i);
-                updateMonth(frag.getMonth());
+                updateMonthYearText(frag.getWeek());
             }
 
             @Override
@@ -93,7 +95,9 @@ public class CustomCalendar extends LinearLayout {
     }
 
 
-    public void updateMonth(int month){
+    public void updateMonthYearText(Week week){
+        int month = week.getMonth();
+        int year = week.getYear();
         String monthText;
         switch (month){
             case Calendar.JANUARY:
@@ -135,7 +139,7 @@ public class CustomCalendar extends LinearLayout {
             default:
                 monthText = "(Not Found)";
         }
-        this.textMonthYear.setText(monthText + " 2019");
+        this.textMonthYear.setText(monthText + " " + year);
     }
 
 

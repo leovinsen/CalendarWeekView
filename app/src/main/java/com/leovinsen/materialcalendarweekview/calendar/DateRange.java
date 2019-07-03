@@ -55,13 +55,13 @@ public class DateRange {
                 Log.d(TAG, "Different month");
                 //different month
                 if(!previousEndOfMonthIsSaturday){
-                    Log.d(TAG, "Adding new week");
+                    Log.d(TAG, "Adding new getWeek");
                     data.add(week);
                     week = new Week();
 
                 } else {
                     previousEndOfMonthIsSaturday = false;
-                    Log.d(TAG, "Last Month end of month was saturday; skip adding an empty week");
+                    Log.d(TAG, "Last Month end of month was saturday; skip adding an empty getWeek");
                 }
                 //dont increment calendar
             } else {
@@ -95,7 +95,7 @@ public class DateRange {
                         if(endOfMonth == day){
                             previousEndOfMonthIsSaturday = true;
                         }
-                        Log.d(TAG, "Adding new week");
+                        Log.d(TAG, "Adding new getWeek");
                         break;
                     default:
                         Log.e(TAG, "Default");
@@ -108,8 +108,8 @@ public class DateRange {
 
         }
 
-        //If last added week is fully filled, don't add
-        //Else, add it to calendar (because add week is only executed on Saturdays which can only happen if week is fully filled)
+        //If last added getWeek is fully filled, don't add
+        //Else, add it to calendar (because add getWeek is only executed on Saturdays which can only happen if getWeek is fully filled)
         if(!week.isEmpty()){
             data.add(week);
         }

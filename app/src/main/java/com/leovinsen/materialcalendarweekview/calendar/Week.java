@@ -11,6 +11,7 @@ class Week implements Serializable {
     private CalendarDay fri;
     private CalendarDay sat;
     private int month = -1;
+    private int year = -1;
 
     boolean isEmpty(){
         return sun == null &&
@@ -26,45 +27,46 @@ class Week implements Serializable {
         return month;
     }
 
-    private void setMonth(CalendarDay day){
+    private void setMonthYear(CalendarDay day){
         if(month == -1 ) {
             this.month = day.getMonth();
+            this.year = day.getYear();
         }
     }
 
     public void setSun(CalendarDay sun) {
         this.sun = sun;
-        setMonth(sun);
+        setMonthYear(sun);
     }
 
     public void setMon(CalendarDay mon) {
         this.mon = mon;
-        setMonth(mon);
+        setMonthYear(mon);
     }
 
     public void setTue(CalendarDay tue) {
         this.tue = tue;
-        setMonth(tue);
+        setMonthYear(tue);
     }
 
     public void setWed(CalendarDay wed) {
         this.wed = wed;
-        setMonth(wed);
+        setMonthYear(wed);
     }
 
     public void setThu(CalendarDay thu) {
         this.thu = thu;
-        setMonth(thu);
+        setMonthYear(thu);
     }
 
     public void setFri(CalendarDay fri) {
         this.fri = fri;
-        setMonth(fri);
+        setMonthYear(fri);
     }
 
     public void setSat(CalendarDay sat) {
         this.sat = sat;
-        setMonth(sat);
+        setMonthYear(sat);
     }
 
     public CalendarDay getSun() {
@@ -93,5 +95,9 @@ class Week implements Serializable {
 
     public CalendarDay getSat() {
         return sat;
+    }
+
+    public int getYear() {
+        return year;
     }
 }
